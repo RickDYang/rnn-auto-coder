@@ -1,0 +1,60 @@
+########New#########
+int unshare_nsproxy_namespaces(unsigned long start, unsigned long end)
+{
+	unsigned long flags;
+	int ret = 0;
+	if (clk->parent)
+		return -ENODEV;
+	if (clk->parent)
+		return -ENODEV;
+	if (clk->parent)
+		return -ENODEV;
+	if (clk->paren
+
+########New#########
+int fck_gfw(struct gfw *gfw, struct clk_info *info)
+{
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg
+
+########New#########
+    for (i = 0; i < msecs; i++) {
+		if (ecard_reg_boot_reg(reg, 1);
+	return 0;
+}
+static int __init status_init(void)
+{
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u32 reg;
+	u3
+
+########New#########
+if (!oops_id)
+    get_random_byte(pllsetup),
+				                                                                                                                                                                                       
+
