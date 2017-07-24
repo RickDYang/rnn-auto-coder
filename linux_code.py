@@ -2,9 +2,9 @@ import os
 from code_data import *
 
 class linux_code:
-    def __init__(self, root, ext=[]):
+    def __init__(self, root, ext=[], looping = True):
         '''constructor
-        
+        looping
         Keyword argument:
         root -- root directory to get source code file
         ext -- file extions to filters
@@ -14,8 +14,8 @@ class linux_code:
         
         #divid into training & validation sets in 90%/10%
         validation_size = len(source_files) // 10;
-        self.validation_data = code_data(source_files[:validation_size])
-        self.training_data = code_data(source_files[validation_size:])
+        self.validation_data = code_data(source_files[:validation_size], looping)
+        self.training_data = code_data(source_files[validation_size:], looping)
 
     def get_source_files(self, root, ext):
         source_files = []

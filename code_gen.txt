@@ -1,60 +1,58 @@
 ########New#########
-int unshare_nsproxy_namespaces(unsigned long start, unsigned long end)
-{
-	unsigned long flags;
-	int ret = 0;
-	if (clk->parent)
-		return -ENODEV;
-	if (clk->parent)
-		return -ENODEV;
-	if (clk->parent)
-		return -ENODEV;
-	if (clk->paren
+int unshare_nsproxy_namespaces(unsi..]]=]]...]].]..]].].].]]]...]]]]..=]....]]...].]...]].]]=]]].].]]....]]...=....].]]..].].]]=.]=.]]]..=]]....]..].].....]]]..].]]]...]]]...]]]..=....=]].]]....]..]..]]]..=.]].]]...=.]..].]]]=.
 
 ########New#########
-int fck_gfw(struct gfw *gfw, struct clk_info *info)
+int unshare_nsproxy_namespaces(unsigned long *prev)
 {
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg
+	struct rq *rq = this_rq();
+	int idle = 0;
+	int i;
+	if (!cpu_online(cpu))
+		return -ENOMEM;
+	return 0;
+}
+static void set_cpus_allowed_preempt_count(struct task_struct *p)
+{
+	struct 
+
+########New#########
+int fck_gfw(struct gfw *gfw, struct task_struct *prev)
+{
+	struct rq *rq = cpu_rq(cpu);
+	if (!(task_running(p)) {
+		if (!cpu_of(rq))
+			return 0;
+	}
+	return 0;
+}
+static inline void __weak arch_sched_clock_task(struct task_struct *prev)
+
 
 ########New#########
     for (i = 0; i < msecs; i++) {
-		if (ecard_reg_boot_reg(reg, 1);
+i				if (!p->sched_class->state)
+				return 0;
+		}
+		if (!cpumask_empty(cpu))
+			return -EFAULT;
+	}
 	return 0;
 }
-static int __init status_init(void)
+static int cpu_rq(struct task_struct *prev)
 {
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u32 reg;
-	u3
+	struct rq *rq = cpu_rq(cpu);
+	if (!rq->cu
 
 ########New#########
-if (!oops_id)
-    get_random_byte(pllsetup),
-				                                                                                                                                                                                       
+    get_random_bytes(&oops_id, sizeof(struct task_struct, se));
+			return 0;
+		}
+		if (!cpu == (p->state & PF_STATIC_KEY) {
+				if (!cpu_rq(cpu)) {
+				if (task_rq(p) && !cpu_active(cpu))
+		return -EFAULT;
+	rq_clock(rq);
+	return rq;
+}
+
 

@@ -21,7 +21,7 @@ class auto_coder_task():
         '''
         self.model_def = model_def
 
-    def train(self, data, paras):
+    def train(self, data, paras, generate_callback):
         '''train an rnn model and return the path where the session stored
         Keyword argument:
         data -- trainig data
@@ -32,6 +32,7 @@ class auto_coder_task():
         log_file = time.strftime('%Y%m%d%H%M_') + auto_coder_task.__training_log
         logging.basicConfig(filename=log_file, level=logging.INFO)
 
+        #with tf.Session(config=config_noGPU) as session:
         with tf.Session() as session:
             # define gradient descent optimizer
             optimizer = tf.train.AdamOptimizer(learning_rate=paras.learning_rate).minimize(model.cost)
@@ -43,24 +44,37 @@ class auto_coder_task():
             iteration = 1
             # get validation data
             batch_v = data.validation_data.get_cache_batch(paras.batch_size * 10, self.model_def.steps)
-            # keep training until reach max iterations
-            while  iteration <= paras.max_iterations:
-                batch = data.training_data.next_batch(paras.batch_size, self.model_def.steps)
-                session.run(optimizer, feed_dict={model.x:batch[0], model.y:batch[1]})
+            
+            try:
+                # keep training until reach max iterations
+                while  iteration <= paras.max_iterations:
+                    batch = data.training_data.next_batch(paras.batch_size, self.model_def.steps)
+                    
+                    # reach end of data is returned batch size less than required batch size
+                    end = batch[0].shape[0] < paras.batch_size
 
-                # display traing status
-                if iteration % paras.display_step == 0:
-                    status = self.cal_status(session, model, iteration, batch, batch_v)
-                    print(status)
-                    logging.info(status)
+                    session.run(optimizer, feed_dict={model.x:batch[0], model.y:batch[1]})
 
-                iteration += 1
+                    # display traing status
+                    if iteration % paras.display_step == 0 or end:
+                        status = self.cal_status(session, model, iteration, batch, batch_v)
+                        print(status)
+                        logging.info(status)
 
-            # save session model & data for later loading and generate
-            path = self.__save_training(session)
+                    if end:
+                        print("Iteration {} No more data".format(iteration))
+                        break
 
-            print("training complete", path)
-            return path
+                    iteration += 1
+            finally:
+                if generate_callback is not None:
+                    generate_callback(session, model)
+
+                # save session model & data for later loading and generate
+                path = self.__save_training(session)
+
+                print("training complete", path)
+                return path
 
     def cal_status(self, session, model, iteration, batch, batch_v):
         # status for current training data

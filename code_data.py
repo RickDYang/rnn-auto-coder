@@ -41,12 +41,13 @@ def str2input(str):
     return input
 
 class code_data:
-    def __init__(self, files):
+    def __init__(self, files, looping = False):
         '''constructor
         Keyword argument:
             files -- files where the source code from
         '''
         self.files = files
+        self.looping = looping
 
         self.words = []
         self.cur_file_idx = 0
@@ -63,12 +64,15 @@ class code_data:
             batch_size -- number of data to get
             steps - number of characters in one input data
         '''
-        x = numpy.ndarray((batch_size, steps, vocabulary_size), dtype=int)
-        y = numpy.ndarray((batch_size, vocabulary_size), dtype=int)
+        x = numpy.ndarray((0, steps, vocabulary_size), dtype=int)
+        y = numpy.ndarray((0, vocabulary_size), dtype=int)
         for i in range(batch_size):
             word = self.get(steps + 1)
-            x[i] = str2input(word[:-1])
-            y[i] = str2input(word[-1])
+            if word == None:
+                return x, y
+
+            x = numpy.append(x, str2input(word[:-1]).reshape(1,steps, vocabulary_size) , axis = 0)
+            y = numpy.append(y, str2input(word[-1]).reshape(1, vocabulary_size), axis = 0)
 
         return x, y
 
@@ -96,7 +100,11 @@ class code_data:
         if len(self.words) == 0:
             # if no more, we start again
             if self.cur_file_idx >= len(self.files):
-                self.cur_file_idx = 0
+                # no looping
+                if self.looping:
+                    self.cur_file_idx = 0
+                else:
+                    return None
 
             #print("new source file:", self.source_files[self.cur_file_idx])
             self.words = self.read_file(self.files[self.cur_file_idx])

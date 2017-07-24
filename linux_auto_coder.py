@@ -6,21 +6,21 @@ from rnn_definition import *
 from linux_code import *
 from training_parameters import *
 import code_data
-import tensorflow as tf
+import tensorflow as tensorflow
 
 # rnn model definitions
-model_def = rnn_definition(steps = 32, hidden_size = 512, LTSM_layers = 4)
+model_def = rnn_definition(steps = 35, hidden_size = 650,
+    LTSM_layers = 2, keep_prob = 0.5)
 
 # for debug
 #parameters = train_parameters(learning_rate = 0.001, batch_size = 10,
 #    max_iterations = 100, display_step= 10)
-
 # training paramaters
-parameters = train_parameters(learning_rate = 0.001, batch_size = 500,
-    max_iterations = 50000, display_step= 1000)
+parameters = train_parameters(learning_rate = 0.002, batch_size = 500,
+   max_iterations = 50000, display_step= 1000)
 
 # source data
-data = linux_code('/home/*/linux-source-4.4.0',['.c'])
+data = linux_code('/home/rickdyang/linux-source-4.4.0/kernel',['.c'], True)
 
 # where to store input texts to generate in which each line presents a prefix to generate
 generate_input = 'input_prefix.txt'
@@ -30,10 +30,10 @@ generate_output = 'code_gen.txt'
 generate_size = 200
 
 def main():
-    #path = train()
+    path = train()
     # need to reset otherwise new nn will fail to create
     #tf.reset_default_graph()
-    generate('201706010910')
+    #generate('201706060058')
 
 def train():
     '''train this model
@@ -42,7 +42,7 @@ def train():
 
     print('start training', time.strftime('%Y-%m-%-d-%H:%M.%S'))
     
-    path = task.train(data, parameters)
+    path = task.train(data, parameters, generate_callback)
 
     print('training completed', time.strftime('%Y-%m-%d-%H:%M.%S'))
     return path
@@ -62,6 +62,7 @@ def generate(path = None):
             dirs = [d for d in os.listdir(cur) if os.path.isdir(os.path.join(cur,d))]
             path = dirs[0]
 
+    model_def.keep_prob = 1
     task = auto_coder_task(model_def)
     task.generate(path, generate_callback)
 
